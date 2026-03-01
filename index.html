@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Glass Effect Container */
+.form-container {
+    width: 380px;
+    padding: 35px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 2px #ffffff;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: white;
+    color: #4f46e5;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #e0e7ff;
+    transform: translateY(-2px);
+}
+
+.error {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #ffdddd;
+}
+
+.success {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+    color: #d1fae5;
+}
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Create Account</h2>
+    <form id="userForm">
+
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="name" required>
+            <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" required minlength="6">
+            <div class="error" id="passwordError"></div>
+        </div>
+
+        <div class="input-group">
+            <label>Age</label>
+            <input type="number" id="age" min="1" max="100" required>
+        </div>
+
+        <div class="input-group">
+            <label>Gender</label>
+            <select id="gender" required>
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>About You</label>
+            <textarea id="about" rows="3"></textarea>
+        </div>
+
+        <button type="submit">Register</button>
+        <div class="success" id="successMessage"></div>
+
+    </form>
+</div>
+
+<script>
+document.getElementById("userForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let valid = true;
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+    document.getElementById("successMessage").textContent = "";
+
+    if (name.length < 3) {
+        document.getElementById("nameError").textContent = "Name must be at least 3 characters.";
+        valid = false;
+    }
+
+    if (!email.includes("@")) {
+        document.getElementById("emailError").textContent = "Enter a valid email address.";
+        valid = false;
+    }
+
+    if (password.length < 6) {
+        document.getElementById("passwordError").textContent = "Password must be at least 6 characters.";
+        valid = false;
+    }
+
+    if (valid) {
+        document.getElementById("successMessage").textContent = "Registration Successful!";
+        document.getElementById("userForm").reset();
+    }
+});
+</script>
+
+</body>
+</html>
